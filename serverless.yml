@@ -1,0 +1,27 @@
+service: dynamodb-s3-delete
+frameworkVersion: '3'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  deploymentMethod: direct
+  iamRoleStatements:
+    - Effect: Allow
+      Resource: [ 'arn:aws:s3:::${env:BUCKET_NAME}/*' ]
+      Action: [ s3:deleteObject ]
+
+functions:
+  index:
+    handler: index.handler
+    events:
+      - stream:
+          type: dynamodb
+          arn: ${env:STREAM_ARN}
+          filterPatterns:
+            - eventName: [REMOVE]
+          batchSize: 10
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-plugin-typescript

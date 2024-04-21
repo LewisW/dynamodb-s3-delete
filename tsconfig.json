@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "strict": false,
+    "target": "es2020",
+    "moduleResolution": "node",
+    "lib": ["es2015"],
+    "outDir": ".build",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "./",
+    "skipLibCheck": true
+  }
+}
